@@ -31,6 +31,15 @@ const Window: React.FC<WindowProps> = ({
     const { closeWindow, minimizeWindow, toggleMaximizeWindow, focusWindow, activeWindowId } =
         useWindowStore();
 
+    const [isMobile, setIsMobile] = React.useState(false);
+
+    React.useEffect(() => {
+        const checkMobile = () => setIsMobile(window.innerWidth < 640);
+        checkMobile();
+        window.addEventListener('resize', checkMobile);
+        return () => window.removeEventListener('resize', checkMobile);
+    }, []);
+
     const windowRef = useRef<HTMLDivElement>(null);
     const isActive = activeWindowId === id;
     const dragControls = useDragControls();
@@ -45,13 +54,15 @@ const Window: React.FC<WindowProps> = ({
         // Keep dragging uncontrolled so Framer Motion operates smoothly without double-offset updates
     };
 
+    const isFullyMaximized = isMaximized || isMobile;
+
     // Convert size properties to CSS class values or inline styles
     const windowStyle: React.CSSProperties = {
         zIndex,
-        width: isMaximized ? '100%' : size.width,
-        height: isMaximized ? 'calc(100vh - 2rem)' : size.height, // 2rem accounts for top menu bar
-        top: isMaximized ? '2rem' : position.y,
-        left: isMaximized ? '0' : position.x,
+        width: isFullyMaximized ? '100%' : size.width,
+        height: isFullyMaximized ? 'calc(100dvh - 3.5rem)' : size.height, // Account for top menu and dock space
+        top: isFullyMaximized ? '2.25rem' : position.y,
+        left: isFullyMaximized ? '0' : position.x,
     };
 
     return (
@@ -61,7 +72,7 @@ const Window: React.FC<WindowProps> = ({
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.95, opacity: 0 }}
             transition={{ type: 'spring', damping: 25, stiffness: 350 }}
-            drag={!isMaximized}
+            drag={!isFullyMaximized}
             dragControls={dragControls}
             dragListener={false}
             dragConstraints={desktopRef}
@@ -70,14 +81,14 @@ const Window: React.FC<WindowProps> = ({
             onDragEnd={handleDragEnd}
             onPointerDown={handlePointerDown}
             style={windowStyle}
-            className={`absolute flex flex-col rounded-xl overflow-hidden glass-panel border border-white/40 shadow-2xl transition-shadow duration-300 max-w-[calc(100vw-1rem)] max-h-[calc(100dvh-5rem)]
-        ${isActive ? 'shadow-black/15 border-white/50 z-20' : 'opacity-95 shadow-black/5 z-10'}
-        ${isMaximized ? 'rounded-none border-t-0 border-x-0' : ''}
+            className={`absolute flex flex-col overflow-hidden glass-panel border border-white/40 shadow-2xl transition-shadow duration-300 sm:max-w-[calc(100vw-1rem)] sm:max-h-[calc(100dvh-5rem)] 
+        ${isActive ? 'shadow-black/15 border-white/50 z-[100]' : 'opacity-95 shadow-black/5 z-10'}
+        ${isFullyMaximized ? 'rounded-none sm:rounded-none border-0' : 'rounded-xl sm:rounded-xl'}
       `}
         >
             {/* Titlebar */}
             <div
-                className="window-titlebar h-9 sm:h-10 px-3 sm:px-4 flex items-center justify-between border-b border-gray-200 backdrop-blur-md cursor-default select-none shrink-0"
+                className="window-titlebar h-10 sm:h-10 px-3 sm:px-4 flex items-center justify-between border-b border-gray-200/50 backdrop-blur-md cursor-default select-none shrink-0"
                 onDoubleClick={() => toggleMaximizeWindow(id)}
                 onPointerDown={(e) => {
                     dragControls.start(e);

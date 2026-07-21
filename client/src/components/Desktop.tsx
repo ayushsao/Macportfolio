@@ -102,15 +102,15 @@ const Desktop: React.FC = () => {
             onClick={handleDesktopClick}
             className="absolute inset-0 top-8 sm:top-9 bottom-20 sm:bottom-[76px] flex flex-col p-3 sm:p-4 z-10 select-none overflow-hidden"
         >
-            {/* Grid column for shortcuts on the left (matches macOS desktop default styling) */}
+            {/* Grid for shortcuts: Top aligned grid on mobile, Left aligned column on desktop */}
             <motion.div
                 variants={containerVariants}
                 initial="hidden"
                 animate="visible"
-                className="flex flex-row flex-wrap content-start items-start justify-start gap-3 sm:flex-col sm:gap-4 h-auto max-w-full sm:h-full sm:w-[100px] z-10"
+                className="grid grid-cols-4 gap-4 sm:flex sm:flex-col sm:gap-4 sm:h-full sm:w-[100px] z-10 w-full px-2 sm:px-0 mt-4 sm:mt-2"
             >
                 {shortcuts.map((shortcut) => (
-                    <motion.div key={shortcut.id} variants={itemVariants}>
+                    <motion.div key={shortcut.id} variants={itemVariants} className="flex justify-center sm:justify-start">
                         <DesktopIcon
                             label={shortcut.label}
                             type={shortcut.type}

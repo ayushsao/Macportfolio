@@ -354,16 +354,24 @@ interface DockIconProps {
 const DockIcon: React.FC<DockIconProps> = ({ item, mouseX, isAppOpen, isAppMinimized, onClick }) => {
     const ref = useRef<HTMLDivElement>(null);
     const [isBouncing, setIsBouncing] = useState(false);
+    const [isMobile, setIsMobile] = useState(false);
+    React.useEffect(() => {
+        const checkMobile = () => setIsMobile(window.innerWidth < 640);
+        checkMobile();
+        window.addEventListener('resize', checkMobile);
+        return () => window.removeEventListener('resize', checkMobile);
+    }, []);
 
     // Compute distance from mouse to this icon's center
     const distance = useTransform(mouseX, (val: number) => {
+        if (isMobile) return Infinity; // Disable magnification effect on mobile
         const bounds = ref.current?.getBoundingClientRect() ?? { x: 0, width: 0 };
         return val - bounds.x - bounds.width / 2;
     });
 
     // Parabolic magnification: icons scale up smoothly as mouse approaches
     const widthSync = useTransform(distance, [-MAGNIFICATION_RANGE, 0, MAGNIFICATION_RANGE], [DOCK_ICON_BASE, DOCK_ICON_MAX, DOCK_ICON_BASE]);
-    const width = useSpring(widthSync, {
+    const width = useSpring(isMobile ? DOCK_ICON_BASE : widthSync, {
         mass: 0.1,
         stiffness: 150,
         damping: 12,
