@@ -335,6 +335,11 @@ const Dock: React.FC = () => {
                                     openWindow(item.appId);
                                 }
                             }}
+                            onDoubleClick={() => {
+                                if (item.appId) {
+                                    closeWindow(item.appId);
+                                }
+                            }}
                         />
                     );
                 })}
@@ -349,12 +354,15 @@ interface DockIconProps {
     isAppOpen: boolean;
     isAppMinimized: boolean;
     onClick: () => void;
+    onDoubleClick?: () => void;
 }
 
-const DockIcon: React.FC<DockIconProps> = ({ item, mouseX, isAppOpen, isAppMinimized, onClick }) => {
+const DockIcon: React.FC<DockIconProps> = ({ item, mouseX, isAppOpen, isAppMinimized, onClick, onDoubleClick }) => {
     const ref = useRef<HTMLDivElement>(null);
     const [isBouncing, setIsBouncing] = useState(false);
     const [isMobile, setIsMobile] = useState(false);
+    const lastTapRef = useRef<number>(0);
+
     React.useEffect(() => {
         const checkMobile = () => setIsMobile(window.innerWidth < 640);
         checkMobile();
@@ -383,8 +391,21 @@ const DockIcon: React.FC<DockIconProps> = ({ item, mouseX, isAppOpen, isAppMinim
 
     const [showTooltip, setShowTooltip] = useState(false);
 
-    const handleClick = () => {
-        // macOS bounce animation on click
+    const handleClickWrapper = (e: React.MouseEvent | React.TouchEvent) => {
+        const now = Date.now();
+        const DOUBLE_CLICK_DELAY = 300; // ms threshold for double tap
+
+        if (now - lastTapRef.current < DOUBLE_CLICK_DELAY) {
+            // Treat as double click
+            setIsBouncing(false);
+            if (onDoubleClick) onDoubleClick();
+            lastTapRef.current = 0; // Reset
+            return;
+        }
+
+        lastTapRef.current = now;
+
+        // Single click behavior (macOS bounce animation on click)
         setIsBouncing(true);
         onClick();
         setTimeout(() => setIsBouncing(false), 600);
@@ -432,7 +453,7 @@ const DockIcon: React.FC<DockIconProps> = ({ item, mouseX, isAppOpen, isAppMinim
             <motion.div
                 ref={ref}
                 style={{ width, height: width }}
-                onClick={handleClick}
+                onClick={handleClickWrapper}
                 className="relative flex items-center justify-center select-none cursor-pointer outline-none mx-[1px]"
             >
                 {/* Bounce wrapper for macOS app-launch effect */}
