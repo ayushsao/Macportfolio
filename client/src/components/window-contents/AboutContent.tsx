@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
+import { GitHubCalendar } from 'react-github-calendar';
 import { getAbout } from '../../api';
 import { AboutInfo } from '../../types';
 import profileImg from './profile.jpg';
@@ -205,6 +206,44 @@ const AboutContent: React.FC = () => {
                         );
                     })}
                 </div>
+                {/* GitHub Contributions & Activity */}
+                <motion.div variants={itemVariants} className="space-y-3 pb-2">
+                    <h3 className="text-xs font-bold text-gray-400 uppercase tracking-widest">Open Source & Activity</h3>
+                    <div className="bg-white/60 border border-gray-100 p-5 rounded-xl text-center shadow-sm overflow-x-auto w-full github-container">
+                        <div className="min-w-fit mx-auto flex justify-center opacity-90 hover:opacity-100 transition-opacity">
+                            <GitHubCalendar
+                                username="ayushsao"
+                                colorScheme="light"
+                                blockSize={11}
+                                blockMargin={4}
+                                fontSize={10}
+                                theme={{
+                                    light: ['#ebedf0', '#9be9a8', '#40c463', '#30a14e', '#216e39'],
+                                    dark: ['#ebedf0', '#9be9a8', '#40c463', '#30a14e', '#216e39']
+                                }}
+                            />
+                        </div>
+                    </div>
+                </motion.div>
+
+                {/* Testimonials */}
+                <motion.div variants={itemVariants} className="space-y-3 pb-4">
+                    <h3 className="text-xs font-bold text-gray-400 uppercase tracking-widest">Keywords & Recommendations</h3>
+                    <div className="bg-gradient-to-r from-blue-50/50 to-pink-50/50 border border-blue-100/50 p-5 rounded-xl">
+                        <p className="text-sm font-medium text-gray-700 italic leading-relaxed">
+                            "Ayush consistently demonstrates a deep understanding of full-stack scalability. His work architecting event-driven pipelines and caching layers at PrepAI significantly lowered latency — a vital component for competing at scale."
+                        </p>
+                        <div className="mt-4 flex items-center space-x-3">
+                            <div className="w-8 h-8 rounded-full bg-slate-200 flex items-center justify-center text-slate-600 font-bold text-xs">
+                                SM
+                            </div>
+                            <div>
+                                <p className="text-gray-900 font-bold text-xs">Senior Mentor</p>
+                                <p className="text-gray-500 text-[10px]">Open Source Contributor Network</p>
+                            </div>
+                        </div>
+                    </div>
+                </motion.div>
             </motion.div>
         </motion.div>
     );

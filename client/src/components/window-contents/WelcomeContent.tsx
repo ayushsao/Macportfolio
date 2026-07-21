@@ -1,15 +1,32 @@
 import React from 'react';
 import { useWindowStore } from '../../store/useWindowStore';
+import { motion } from 'framer-motion';
 
 const WelcomeContent: React.FC = () => {
     const openWindow = useWindowStore((state) => state.openWindow);
 
+    const fadeUp = {
+        hidden: { opacity: 0, y: 15 },
+        visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
+    };
+
+    const staggerContainer = {
+        hidden: { opacity: 0 },
+        visible: {
+            opacity: 1,
+            transition: { staggerChildren: 0.15 }
+        }
+    };
+
     return (
-        <div className="h-full flex flex-col justify-between p-8 text-center select-none bg-gradient-to-tr from-pink-50/50 to-blue-50/40">
-            {/* Decorative blossom icon or illustration */}
-            <div className="flex-1 flex flex-col items-center justify-center space-y-4 my-auto">
-                {/* Premium vector cherry blossom SVG */}
-                <div className="animate-pulse duration-[3000ms] mb-3">
+        <motion.div
+            initial="hidden"
+            animate="visible"
+            variants={staggerContainer}
+            className="h-full flex flex-col justify-between p-10 text-center select-none bg-gradient-to-tr from-pink-50/60 via-white to-blue-50/40"
+        >
+            <div className="flex-1 flex flex-col items-center justify-center space-y-6 my-auto">
+                <motion.div variants={fadeUp} className="animate-pulse duration-[3000ms] mb-2">
                     <svg className="w-16 h-16 drop-shadow-md" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <defs>
                             <linearGradient id="petalGrad" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -52,49 +69,51 @@ const WelcomeContent: React.FC = () => {
                             ))}
                         </g>
                     </svg>
-                </div>
+                </motion.div>
 
-                {/* Cursive display headline */}
-                <h1 className="font-cursive text-7.5xl text-pink-650 drop-shadow-sm select-none">
-                    Portfolio
-                </h1>
+                <motion.h1 variants={fadeUp} className="font-extrabold tracking-tight text-5xl md:text-6xl text-gray-900 drop-shadow-sm select-none">
+                    Crafting Scalable <br />
+                    <span className="text-pink-600 font-cursive text-6xl md:text-7xl font-normal drop-shadow-sm">Solutions.</span>
+                </motion.h1>
 
-                <p className="text-gray-500 font-medium tracking-wide text-xs uppercase">
+                <motion.p variants={fadeUp} className="text-pink-600 font-bold tracking-widest text-xs uppercase bg-pink-100/50 px-4 py-1.5 rounded-full border border-pink-200">
                     Ayush Kumar Sao • Full Stack Developer
-                </p>
+                </motion.p>
 
-                <p className="text-gray-600 text-sm max-w-sm font-light mt-2 leading-relaxed">
-                    Welcome to my interactive desktop environment. Experience my resume, skills, projects, and work history in a desktop layout.
-                </p>
+                <motion.p variants={fadeUp} className="text-gray-600 text-[15px] max-w-md font-medium mt-4 leading-relaxed">
+                    I build high-performance backend pipelines and elegant interfaces. Experience my journey through this interactive Mac environment.
+                </motion.p>
             </div>
 
-            {/* Instructions footer */}
-            <div className="border-t border-black/5 pt-6 mt-4">
-                <p className="text-xs text-gray-400 font-medium mb-3">
-                    HOW TO EXPLORE:
+            <motion.div variants={fadeUp} className="border-t border-black/5 pt-8 mt-6">
+                <p className="text-[10px] text-gray-400 font-bold mb-4 uppercase tracking-widest">
+                    Start Exploring
                 </p>
-                <div className="flex flex-wrap justify-center gap-3">
+                <div className="flex flex-wrap justify-center gap-4">
                     <button
                         onClick={() => openWindow('about')}
-                        className="px-4 py-1.5 bg-pink-500/10 hover:bg-pink-500/20 text-pink-700 text-xs font-semibold rounded-full border border-pink-500/20 transition active:scale-95 cursor-default"
+                        className="px-5 py-2.5 bg-pink-50 hover:bg-pink-100 text-pink-700 text-sm font-semibold rounded-2xl border border-pink-200 transition-all duration-300 hover:shadow-lg hover:shadow-pink-100/50 active:scale-95 cursor-default flex items-center gap-2"
                     >
+                        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>
                         About Me
                     </button>
                     <button
                         onClick={() => openWindow('projects')}
-                        className="px-4 py-1.5 bg-blue-500/10 hover:bg-blue-500/20 text-blue-700 text-xs font-semibold rounded-full border border-blue-500/20 transition active:scale-95 cursor-default"
+                        className="px-5 py-2.5 bg-blue-50 hover:bg-blue-100 text-blue-700 text-sm font-semibold rounded-2xl border border-blue-200 transition-all duration-300 hover:shadow-lg hover:shadow-blue-100/50 active:scale-95 cursor-default flex items-center gap-2"
                     >
+                        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" /></svg>
                         Projects
                     </button>
                     <button
                         onClick={() => openWindow('contact')}
-                        className="px-4 py-1.5 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-700 text-xs font-semibold rounded-full border border-emerald-500/20 transition active:scale-95 cursor-default"
+                        className="px-5 py-2.5 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 text-sm font-semibold rounded-2xl border border-emerald-200 transition-all duration-300 hover:shadow-lg hover:shadow-emerald-100/50 active:scale-95 cursor-default flex items-center gap-2"
                     >
+                        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
                         Get in Touch
                     </button>
                 </div>
-            </div>
-        </div>
+            </motion.div>
+        </motion.div>
     );
 };
 

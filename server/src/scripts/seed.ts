@@ -54,31 +54,26 @@ const seedData = async () => {
 
         const projectsList = [
             {
-                title: "PrepCode",
-                description: "An advanced technical coding judge platform designed to compile source code, execute custom test cases, and simulate real-time programming interviews.",
-                techStack: ["React", "Express", "Node.js", "MongoDB", "Kafka", "Redis", "TypeScript", "Wandbox API"],
+                title: "PrepAI",
+                description: "AI Interview Preparation Platform",
+                techStack: ["MongoDB", "Express.js", "React.js", "Node.js", "Gemini API", "Kafka", "Redis"],
                 bulletPoints: [
-                    "Built a secure JWT-based authentication system supporting email/password and session management.",
-                    "Architected an event-driven async compilation pipeline utilizing Apache Kafka to handle compiler requests safely under load.",
-                    "Integrated a Redis caching layer, decreasing database query loads by 45% and reduced system latency by ~25%.",
-                    "Engineered automated code checking and logic verification using the Wandbox compilers API to run code against pre-defined test suites.",
-                    "Optimized performance to sustain 50+ concurrent users with sub-300ms core code execution feedback latency."
+                    "Built a scalable AI interview platform using React.js, Node.js, Express.js, MongoDB, Apache Kafka, and Redis, implementing JWT authentication, RESTful APIs, and an event-driven architecture to support 50+ concurrent users with sub-300ms API latency.",
+                    "Designed an asynchronous code execution pipeline using Apache Kafka, Wandbox API, and Gemini API, while leveraging Redis for caching, reducing execution delay by ~ 25%, database queries by 45%, and manual evaluation effort by ~ 40%."
                 ],
-                githubLink: "https://github.com/ayushsao/PrepCode",
-                liveLink: "https://prepcode-interview.vercel.app"
+                githubLink: "https://github.com/ayushsao/PrepAI",
+                liveLink: "https://prepai-qem5.onrender.com/"
             },
             {
-                title: "TalentStream",
-                description: "A recruitment Applicant Tracking System (ATS) designed to parse resume files, rank candidates based on keyword matching, and manage pipeline progression.",
-                techStack: ["React", "Express", "Node.js", "MongoDB", "Tailwind CSS", "TypeScript", "PDF-parse"],
+                title: "HiringSignal",
+                description: "AI-Powered Resume Shortlisting Simulator",
+                techStack: ["React.js", "Node.js", "MongoDB", "Groq API"],
                 bulletPoints: [
-                    "Engineered an ATS scoring engine evaluating skills, credentials, and match parameters against job post conditions.",
-                    "Implemented secure multi-file upload handling and text parsing algorithms to extract unstructured text from PDF and PDF-parse metadata.",
-                    "Tested and scaled server capacity to support 50–200 simultaneous users during simulations.",
-                    "Designed an interactive dashboard dashboard for HR recruiters to search, catalog, filter, and score candidates in real-time."
+                    "Built an AI-powered resume analysis system using React.js, Node.js, MongoDB, and Groq API, following a RESTful client-server architecture to simulate ATS-based shortlisting, tested across 50–200 users.",
+                    "Implemented text parsing, keyword extraction, and scoring logic to evaluate resumes based on skills, projects, and role alignment, optimizing resume processing across multiple formats."
                 ],
-                githubLink: "https://github.com/ayushsao/TalentStream",
-                liveLink: "https://talentstream-ats.netlify.app"
+                githubLink: "https://github.com/ayushsao/HiringSignal",
+                liveLink: "https://hiring-signal-seven.vercel.app/"
             }
         ];
 
