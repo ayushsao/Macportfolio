@@ -76,16 +76,20 @@ const TicTacToeContent: React.FC = () => {
     };
 
     const handleClick = (index: number) => {
-        if (board[index] || winner || isDraw) return;
+        // Prevent moves if game over, square occupied, or it's AI's turn
+        if (board[index] || winner || isDraw || (gameMode === 'ai' && !isXNext)) return;
 
         const nextBoard = [...board];
-        nextBoard[index] = 'X';
-        updateBoard('X', nextBoard);
+        const currentPlayer = isXNext ? 'X' : 'O';
+        nextBoard[index] = currentPlayer;
+
+        setBoard(nextBoard);
+        setIsXNext(!isXNext);
 
         if (gameMode === 'ai' && !calculateWinner(nextBoard) && nextBoard.some((s) => s === null)) {
             setTimeout(() => {
                 makeAIMove(nextBoard);
-            }, 300);
+            }, 350);
         }
     };
 
@@ -137,7 +141,9 @@ const TicTacToeContent: React.FC = () => {
             <div className="w-full flex items-center justify-between mt-3 text-xs">
                 <div className="font-semibold text-gray-300">
                     {winner ? (
-                        <span className="text-emerald-400">Winner: {winner === 'X' ? 'AYUSH' : 'ROBOT'} 🎉</span>
+                        <span className="text-emerald-400">
+                            Winner: {winner === 'X' ? 'Player X' : (gameMode === 'ai' ? 'Robot O' : 'Player O')} 🎉
+                        </span>
                     ) : isDraw ? (
                         <span className="text-amber-400">Match Drawn! 🤝</span>
                     ) : (
