@@ -111,7 +111,7 @@ const ContactContent: React.FC = () => {
                             name="email"
                             value={form.email}
                             onChange={handleChange}
-                            placeholder="name@company.com"
+                            placeholder="you@email.com"
                             disabled={status === 'sending'}
                             className="w-full text-xs px-3.5 py-2.5 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:border-pink-500 focus:bg-white transition"
                             required
@@ -127,7 +127,7 @@ const ContactContent: React.FC = () => {
                             name="subject"
                             value={form.subject}
                             onChange={handleChange}
-                            placeholder="Opportunity / Coffee chat"
+                            placeholder="Job / Chat"
                             disabled={status === 'sending'}
                             className="w-full text-xs px-3.5 py-2.5 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:border-pink-500 focus:bg-white transition"
                         />
