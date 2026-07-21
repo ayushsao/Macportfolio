@@ -61,7 +61,7 @@ const ContactContent: React.FC = () => {
                         <span className="text-lg">📧</span>
                         <div>
                             <p className="font-bold text-gray-400 uppercase text-[9px] tracking-wider">Email</p>
-                            <a href="mailto:ayushsao32@gmail.com" className="font-semibold text-pink-600 hover:underline">ayushsao32@gmail.com</a>
+                            <a href="mailto:ayushsao32@gmail.com" className="font-semibold text-pink-600 hover:underline break-all">ayushsao32@gmail.com</a>
                         </div>
                     </div>
                     <div className="flex items-center space-x-3 text-xs text-gray-600 bg-white border border-gray-150 p-3 rounded-xl">
@@ -100,7 +100,7 @@ const ContactContent: React.FC = () => {
                     />
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                <div className="grid grid-cols-1 gap-3.5">
                     <div>
                         <label htmlFor="contact-email" className="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1.5">
                             Email Address <span className="text-red-500">*</span>
