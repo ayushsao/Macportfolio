@@ -57,25 +57,25 @@ const ContactContent: React.FC = () => {
                 </p>
 
                 <div className="pt-4 space-y-3">
-                    <div className="flex items-center space-x-3 text-xs text-gray-600 bg-white border border-gray-150 p-3 rounded-xl">
-                        <span className="text-lg">📧</span>
-                        <div>
-                            <p className="font-bold text-gray-400 uppercase text-[9px] tracking-wider">Email</p>
-                            <a href="mailto:ayushsao32@gmail.com" className="font-semibold text-pink-600 hover:underline break-all">ayushsao32@gmail.com</a>
+                    <div className="flex items-center space-x-3 text-xs text-gray-600 bg-white border border-gray-150 p-3 rounded-xl w-full">
+                        <span className="text-lg flex-shrink-0">📧</span>
+                        <div className="min-w-0 flex-1">
+                            <p className="font-bold text-gray-400 uppercase text-[9px] tracking-wider whitespace-nowrap">Email</p>
+                            <a href="mailto:ayushsao32@gmail.com" className="font-semibold text-pink-600 hover:underline break-all block text-[11px] sm:text-xs">ayushsao32@gmail.com</a>
                         </div>
                     </div>
-                    <div className="flex items-center space-x-3 text-xs text-gray-600 bg-white border border-gray-150 p-3 rounded-xl">
-                        <span className="text-lg">📞</span>
-                        <div>
-                            <p className="font-bold text-gray-400 uppercase text-[9px] tracking-wider">Call / Text</p>
-                            <a href="tel:+919693701652" className="font-semibold text-blue-600 hover:underline">+91-9693701652</a>
+                    <div className="flex items-center space-x-3 text-xs text-gray-600 bg-white border border-gray-150 p-3 rounded-xl w-full">
+                        <span className="text-lg flex-shrink-0">📞</span>
+                        <div className="min-w-0 flex-1">
+                            <p className="font-bold text-gray-400 uppercase text-[9px] tracking-wider whitespace-nowrap">Call / Text</p>
+                            <a href="tel:+919693701652" className="font-semibold text-blue-600 hover:underline truncate block text-[11px] sm:text-xs">+91-9693701652</a>
                         </div>
                     </div>
-                    <div className="flex items-center space-x-3 text-xs text-gray-600 bg-white border border-gray-150 p-3 rounded-xl">
-                        <span className="text-lg">📍</span>
-                        <div>
-                            <p className="font-bold text-gray-400 uppercase text-[9px] tracking-wider">Location</p>
-                            <span className="font-semibold text-gray-800">Bangalore, India</span>
+                    <div className="flex items-center space-x-3 text-xs text-gray-600 bg-white border border-gray-150 p-3 rounded-xl w-full">
+                        <span className="text-lg flex-shrink-0">📍</span>
+                        <div className="min-w-0 flex-1">
+                            <p className="font-bold text-gray-400 uppercase text-[9px] tracking-wider whitespace-nowrap">Location</p>
+                            <span className="font-semibold text-gray-800 truncate block text-[11px] sm:text-xs">Bangalore, India</span>
                         </div>
                     </div>
                 </div>
