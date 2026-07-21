@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { playStartupChime } from '../utils/audio';
 
 interface PreloaderProps {
     onComplete: () => void;
 }
 
 const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
-    const [progress, setProgress] = useState(100);
+    const progress = 100;
     const [isComplete, setIsComplete] = useState(false);
 
     useEffect(() => {
